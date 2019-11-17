@@ -1,9 +1,8 @@
-FROM jwilder/docker-gen
+FROM alpine/nginx
 
 RUN apk update \
-    && apk add nginx \
-    && mkdir /run/nginx
+    && apk upgrade \
+    && mkdir  /var/www/acme
 
 COPY nginx.conf /etc/nginx/nginx.conf
-
-ENTRYPOINT ["/usr/sbin/nginx"]
+CMD ["-c", "/etc/nginx/nginx.conf"]
